@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="{{ url_for('static', filename='chart.js') }}"></script>
+
+    <title>Jira Ticket Status</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        /* Add CSS classes for different status colors */
+        .status-icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        .status-closed {
+            background-color: green;
+        }
+
+        .status-pending-release {
+            background-color: orange;
+        }
+
+        .status-support-in-progress {
+            background-color: blue;
+        }
+
+        .status-escalated {
+            background-color: red;
+        }
+
+        .status-waiting-validation {
+            background-color: purple;
+        }
+        .status-waiting-support {
+            background-color: rgb(174, 235, 7);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Jira Ticket Status</h1>
+    </div>
+    <div class="container">
+        <form method="post" action="/">
+            <div class="form-group">
+                <label for="ticketId">Enter Jira ticket ID:</label>
+                <input type="text" class="form-control" id="ticketId" name="ticketId" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Check Status</button>
+        </form>
+        {% if status %}
+            <div class="mt-4">
+                <h5>Status:</h5>
+                <!-- Add the appropriate status icon and color based on the status value -->
+                {% if status == "Fermée" %}
+                    <p><span class="status-icon status-closed"></span>{{ status }}</p>
+                {% elif status == "Pending release" %}
+                    <p><span class="status-icon status-pending-release"></span>{{ status }}</p>
+                {% elif status == "Support In Progress" %}
+                    <p><span class="status-icon status-support-in-progress"></span>{{ status }}</p>
+                {% elif status == "Escalated" %}
+                    <p><span class="status-icon status-escalated"></span>{{ status }}</p>
+                {% elif status == "Waiting For Customer validation" %}
+                    <p><span class="status-icon status-waiting-validation"></span>{{ status }}</p>
+                {% elif status == "Waiting for support" %}
+                    <p><span class="status-icon status-waiting-support"></span>{{ status }}</p>
+                {% endif %}
+            </div>
+            {% if description %}
+                <div class="mt-4">
+                    <h5>Description:</h5>
+                    <p>{{ description }}</p>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+    <div class="footer">
+        <p>&copy; 2023 Jira Ticket Status. All rights reserved.</p>
+    </div>
+</body>
+</html>
