@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 options = {"server": "https://hagerdigitalfactory.atlassian.net/"}
 username = "hageruser@gmail.com"
-api_token = "ATATT3xFfGF0QNcBLN5jiJhivhLJVD2jdJv4CelQ5ybqo-JeOYeZn8iRrvlB1LtF-_qchWIvMk2VIyJF3XxYGpjX3ilXZmSfPHuLRv2x_imweIKUdPt4oxovRoPSR-QkPntsNcPt1K-ZY4EnCoMT8b8KCDph3YrS9tq2nzrqcl0tSxfEfKUDUeo=F88A88EC"
+api_token = ""
 
 
 jira = JIRA(options, basic_auth=(username, api_token))
